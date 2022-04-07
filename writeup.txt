@@ -1,0 +1,33 @@
+1. In general, the linear model of average yearly temperatures has a better fit
+than the linear model of temperatures taken on a single day, January 10.
+The yearly model has a r squared value of .189 compared to the daily model
+has a r squared value of .053.  The yearly model has a higher r squared value
+because the data points are the mean of 365 (or 366 leap year) days which
+minimizes the effect of outlier days that have an extreme temperature.
+However, both graphs have a r squared value that is much closer to 0 than
+1 which is due to noisiness caused by the variability of measuring a single day
+in the case of the daily model and in the case of the yearly model, although better,
+the data also has a significant degree of variability also due to a small sample size
+(i.e. sampling the mean of 365 days is better than sampling 1 day but 365 is still not
+a very large number).  Measuring a single day or a mean of 365 days allows for more variation from
+1 year to the next(i.e. a unusually cold day may be sampled one year followed by an unusually warm day the next year). 
+Lastly, the slopes for both models suggest that on average there is a long term trend
+of increasing temperatures despite flucuations in those results from 1 year to the next.  The yearly model
+also has a lower se over slope ratio which suggests that the upward trend which is seen in the yearly model is
+less likely by chance than the daily model.  The yearly model appears to exihibit a slightly higher slope 
+than the daily model and both models signal an upward trend in temperature over the years.
+
+2. The linear model corresponding to the data accross multiple cities has a r squared value of .746 significantly higher 
+than either of the models for temperatures of just New York City.  It is likely that the r squared value and overall fit of
+the multi city model is better than the single city models because each data point is averaged from a larger data set and the data is collected from
+multiple regions of the United States which I believe minimizes the effect that a single outlying weather pattern can have on 1 data point(i.e.
+A heat wave accross the east coast might affect temperatures in New York but not the whole country at the same point in time, San Fransisco would
+be unaffected by a heat wave in New York).  Overall, it is likely that collecting data from multiple cities rather than 1 city reduces variability of the data
+and therefore nosiness.  The multiple city model also exhibits a lower se to slope ratio which should give us greater confidenence that the upward trend of the model 
+(suggesting an overall trend of global warming) is not by chance compared with the upward trends of the single city models.  I believe that if 3 cities were used to
+calculate the average than we would once again trend towards having noiser data, however, I anticipate that the distance between cities will likely have a more
+profound effect on the variability of the data than the actual number of cities that the data is collected from.  That is to say 1,000 cities within a close
+proximity to one another (e.g. the New England region) will produce data that is noisier than 100 cities confined to the east coast and the least noisy data would
+be from 10 cities that were all located in different regions of the United States.
+
+3. 
