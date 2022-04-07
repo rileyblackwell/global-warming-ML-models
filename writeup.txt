@@ -30,4 +30,9 @@ profound effect on the variability of the data than the actual number of cities 
 proximity to one another (e.g. the New England region) will produce data that is noisier than 100 cities confined to the east coast and the least noisy data would
 be from 10 cities that were all located in different regions of the United States.
 
-3. 
+3. The linear model of the 5 year moving averages has a r squared value of .924 which is significantly higher than either of the models
+from part A and is also a higher r squared value than the model from part B.  Additionally the model from part 3 has the lowest SE over slope
+ratio which should give us the greatest confidenece that the trend of this model isn't by chance.  It is likely that the model from part 3
+exhibits the tighest fit to the data because taking the 5 year moving average takes a mean of 5 numbers (except for the cases were only a moving average < 5 can be calculated)
+therefore by taking the mean the effect of outlier data points is minimized.  Finally, like the models from part 1 and 2, the model from part 3 shows a consistent
+trend of increasing temperatures suggesting an upward trend towards global warming.   
