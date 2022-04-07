@@ -184,14 +184,12 @@ def r_squared(y, estimated):
         a float for the R-squared error term
     """
     # Calculates the numerator: sum of the squared differences for the estimated and the actual values.
-    est_diff = (y - estimated)**2
-    total_est_diff = sum(est_diff)
+    estimate_error = ((y - estimated)**2).sum() 
     # Calculates the denominator: sum of the squared differences for the actual values and the mean.
     mean = sum(y) / len(y)
-    mean_diff = (y - mean)**2
-    total_mean_diff = sum(mean_diff)
+    mean_error = ((y - mean)**2).sum()
     # Calculates the R squared value: 1 minus the estimated difference divided by the mean difference.
-    return 1 - (total_est_diff / total_mean_diff)
+    return 1 - (estimate_error / mean_error)
      
 def evaluate_models_on_training(x, y, models):
     """
@@ -234,7 +232,7 @@ def evaluate_models_on_training(x, y, models):
         if len(model) == 2:
             se = se_over_slope(x, y, est_y, model)
             r2_se_str += '\nand a Standard Error Over Slope Ratio of {}'.format(se)
-        pylab.title('Predicated Temperatures for Model with a Degree of {}'.format((len(model) - 1)) + r2_se_str)
+        pylab.title('Predicated Temperatures for Model with a Degree of {}'.format(len(model) - 1) + r2_se_str)
         pylab.legend(loc = 'best')
         pylab.show()
          
@@ -307,8 +305,8 @@ def rmse(y, estimated):
     Returns:
         a float for the root mean square error term
     """
-    # TODO
-    pass
+    estimate_error = ((y - estimated)**2).sum()
+    return pylab.sqrt(estimate_error / len(y))
 
 def gen_std_devs(climate, multi_cities, years):
     """
@@ -331,7 +329,7 @@ def gen_std_devs(climate, multi_cities, years):
 def evaluate_models_on_testing(x, y, models):
     """
     For each regression model, compute the RMSE for this model and plot the
-    test data along with the model’s estimation.
+    test data along with the model's estimation.
 
     For the plots, you should plot data points (x,y) as blue dots and your best
     fit curve (aka model) as a red solid line. You should also label the axes
@@ -352,8 +350,21 @@ def evaluate_models_on_testing(x, y, models):
     Returns:
         None
     """
-    # TODO
-    pass
+    for model in models:
+        # Calculates estimated y values(temps in degrees Celsius) from the models polynomial coefficients.
+        est_y = pylab.polyval(model, x)
+        error = rmse(y, est_y)
+        # Creates a figure for the training data and for the estimated values that are derived the model.
+        pylab.figure()
+        pylab.plot(x, y, 'b.', label = 'Data points')
+        pylab.plot(x, est_y, 'r-', label = 'Model')
+        pylab.xlabel('years')
+        pylab.ylabel('degrees Celsius')
+        pylab.title('Predicated Temperatures for Model with a Degree of {}'.format(len(model) - 1) +
+                    '\nwith RMSE value of {}'.format(error))
+        pylab.legend(loc = 'best')
+        pylab.show()
+    
 
 if __name__ == '__main__':
 
