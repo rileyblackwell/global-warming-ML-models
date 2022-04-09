@@ -257,8 +257,7 @@ def gen_cities_avg(climate, multi_cities, years):
         for city in multi_cities:
             city_daily_temps = climate.get_yearly_temp(city, year)
             city_avg_temp += ((city_daily_temps.sum()) / len(city_daily_temps))
-        avg_annual_temp = city_avg_temp / len(multi_cities) 
-        temps.append(avg_annual_temp)
+        temps.append(city_avg_temp / len(multi_cities)) 
         city_avg_temp = 0
     return pylab.array(temps)
 
@@ -323,8 +322,27 @@ def gen_std_devs(climate, multi_cities, years):
         this array corresponds to the standard deviation of the average annual 
         city temperatures for the given cities in a given year.
     """
-    # TODO
-    pass
+    total_daily_temps = []
+    stdevs = []
+    error = 0  
+    for year in years:
+        # Creates a pylab array len(days in the year) with 0s as it's values.
+        daily_temps = climate.get_yearly_temp(multi_cities[0], year)
+        for i in range(len(daily_temps)):
+            total_daily_temps.append(float(0))
+        total_daily_temps = pylab.array(total_daily_temps)    
+        # Averages the daily temperatures accross all cities.
+        for city in multi_cities:
+            total_daily_temps += climate.get_yearly_temp(city, year)
+        total_daily_temps = total_daily_temps / len(multi_cities)    
+        # Calculates the mean temperature for a given year across all cities.
+        mean = total_daily_temps.sum() / len(total_daily_temps)
+        for temp in total_daily_temps:
+            error += (temp - mean)**2 # Calculates the error from the mean in each data point.
+        stdevs.append(pylab.sqrt(error / len(total_daily_temps)))
+        total_daily_temps = []
+        error = 0               
+    return pylab.array(stdevs)
 
 def evaluate_models_on_testing(x, y, models):
     """
@@ -367,55 +385,82 @@ def evaluate_models_on_testing(x, y, models):
     
 
 if __name__ == '__main__':
-
-    pass 
-
     # # Part A.4
-    climate = Climate('data.csv')
-    # x vals are years and y vals are daily temperatures.
-    x_vals, y_vals = [], [] 
-    for year in TRAINING_INTERVAL:
-        x_vals.append(year)
-        y_vals.append(climate.get_daily_temp('NEW YORK', 1, 10, year))
-    x_vals = pylab.array(x_vals)
-    y_vals = pylab.array(y_vals)
-    models = generate_models(x_vals, y_vals, [1])
-    evaluate_models_on_training(x_vals, y_vals, models)
-    # x vals are years and y vals are yearly temperatures.
-    y_vals = []
-    for year in TRAINING_INTERVAL:
-        temps = climate.get_yearly_temp('NEW YORK', year)
-        annual_temp = (temps.sum()) / len(temps)
-        y_vals.append(annual_temp)
-    y_vals = pylab.array(y_vals)
-    models = generate_models(x_vals, y_vals, [1])
-    evaluate_models_on_training(x_vals, y_vals, models)    
-    # Part B
-    climate = Climate('data.csv')
-    x_vals = []
-    for i in TRAINING_INTERVAL:
-        x_vals.append(i)
-    # x_vals are years
-    x_vals = pylab.array(x_vals)
-    # y_vals is a 1-d pylab array and it's values are the average yearly temperature accross multiple cities. 
-    y_vals = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL) 
-    models = generate_models(x_vals, y_vals, [1])
-    evaluate_models_on_training(x_vals, y_vals, models)
-    # Part C
-    climate = Climate('data.csv')
-    x_vals = []
-    for i in TRAINING_INTERVAL:
-        x_vals.append(i)
-    # x_vals are years
-    x_vals = pylab.array(x_vals)
-    # y_vals is a 1-d pylab array and it's values are the average yearly temperature accross multiple cities. 
-    y_vals = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL) 
-    moving_avgs = moving_average(y_vals, 5) # Calculates the 5 year moving average for each year in y_vals.
-    models = generate_models(x_vals, moving_avgs, [1])
-    evaluate_models_on_training(x_vals, moving_avgs, models)
+    # climate = Climate('data.csv')
+    # # x vals are years and y vals are daily temperatures.
+    # x_vals, y_vals = [], [] 
+    # for year in TRAINING_INTERVAL:
+    #     x_vals.append(year)
+    #     y_vals.append(climate.get_daily_temp('NEW YORK', 1, 10, year))
+    # x_vals = pylab.array(x_vals)
+    # y_vals = pylab.array(y_vals)
+    # models = generate_models(x_vals, y_vals, [1])
+    # evaluate_models_on_training(x_vals, y_vals, models)
+    # # x vals are years and y vals are yearly temperatures.
+    # y_vals = []
+    # for year in TRAINING_INTERVAL:
+    #     temps = climate.get_yearly_temp('NEW YORK', year)
+    #     annual_temp = (temps.sum()) / len(temps)
+    #     y_vals.append(annual_temp)
+    # y_vals = pylab.array(y_vals)
+    # models = generate_models(x_vals, y_vals, [1])
+    # evaluate_models_on_training(x_vals, y_vals, models)    
+    
+    # # Part B
+    # climate = Climate('data.csv')
+    # # x_vals are years
+    # x_vals = []
+    # for i in TRAINING_INTERVAL:
+    #     x_vals.append(i)
+    # x_vals = pylab.array(x_vals)
+    # # y_vals is a 1-d pylab array and it's values are the average yearly temperature accross multiple cities. 
+    # y_vals = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL) 
+    # models = generate_models(x_vals, y_vals, [1])
+    # evaluate_models_on_training(x_vals, y_vals, models)
+    
+    # # Part C
+    # climate = Climate('data.csv')
+    # # x_vals are years
+    # x_vals = []
+    # for i in TRAINING_INTERVAL:
+    #     x_vals.append(i)
+    # x_vals = pylab.array(x_vals)
+    # # y_vals is a 1-d pylab array and it's values are the average yearly temperature accross multiple cities. 
+    # y_vals = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL) 
+    # moving_avgs = moving_average(y_vals, 5) # Calculates the 5 year moving average for each year in y_vals.
+    # models = generate_models(x_vals, moving_avgs, [1])
+    # evaluate_models_on_training(x_vals, moving_avgs, models)
 
     # Part D.2
-    # TODO: replace this line with your code
-
+    # climate = Climate('data.csv')
+    # # x_vals are years
+    # x_vals = []
+    # for i in TRAINING_INTERVAL:
+    #     x_vals.append(i)
+    # x_vals = pylab.array(x_vals)
+    # # y_vals is a 1-d pylab array and it's values are the average yearly temperature accross multiple cities. 
+    # y_vals = gen_cities_avg(climate, CITIES, TRAINING_INTERVAL) 
+    # training_moving_avgs = moving_average(y_vals, 5) # Calculates the 5 year moving average for each year in the training interval.
+    # models = generate_models(x_vals, training_moving_avgs, [1, 2, 20])
+    # evaluate_models_on_training(x_vals, training_moving_avgs, models)
+    # # x_vals are years
+    # x_vals = []
+    # for i in TESTING_INTERVAL:
+    #     x_vals.append(i)
+    # x_vals = pylab.array(x_vals)    
+    # # y_vals is a 1-d pylab array and it's values are the average yearly temperature accross multiple cities. 
+    # y_vals = gen_cities_avg(climate, CITIES, TESTING_INTERVAL) 
+    # testing_moving_avgs = moving_average(y_vals, 5) # Calculates the 5 year moving average for each year in the testing interval.
+    # evaluate_models_on_testing(x_vals, testing_moving_avgs, models)
     # Part E
-    # TODO: replace this line with your code
+    # climate = Climate('data.csv')
+    # # x_vals are years
+    # x_vals = []
+    # for i in TRAINING_INTERVAL:
+    #     x_vals.append(i)
+    # x_vals = pylab.array(x_vals)
+    # std_devs = gen_std_devs(climate, CITIES, TRAINING_INTERVAL)
+    # moving_avgs = moving_average(std_devs, 5)
+    # models = generate_models(x_vals, moving_avgs, [1])
+    # evaluate_models_on_training(x_vals, moving_avgs, models)
+    pass
