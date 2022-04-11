@@ -453,14 +453,14 @@ if __name__ == '__main__':
     # testing_moving_avgs = moving_average(y_vals, 5) # Calculates the 5 year moving average for each year in the testing interval.
     # evaluate_models_on_testing(x_vals, testing_moving_avgs, models)
     # Part E
-    # climate = Climate('data.csv')
-    # # x_vals are years
-    # x_vals = []
-    # for i in TRAINING_INTERVAL:
-    #     x_vals.append(i)
-    # x_vals = pylab.array(x_vals)
-    # std_devs = gen_std_devs(climate, CITIES, TRAINING_INTERVAL)
-    # moving_avgs = moving_average(std_devs, 5)
-    # models = generate_models(x_vals, moving_avgs, [1])
-    # evaluate_models_on_training(x_vals, moving_avgs, models)
+    climate = Climate('data.csv')
+    # x_vals are years
+    x_vals = []
+    for i in TRAINING_INTERVAL:
+        x_vals.append(i)
+    x_vals = pylab.array(x_vals)
+    std_devs = gen_std_devs(climate, CITIES, TRAINING_INTERVAL)
+    moving_avgs = moving_average(std_devs, 5)
+    models = generate_models(x_vals, moving_avgs, [1])
+    evaluate_models_on_training(x_vals, moving_avgs, models)
     pass

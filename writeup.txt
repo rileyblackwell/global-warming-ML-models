@@ -35,4 +35,25 @@ from part A and is also a higher r squared value than the model from part B.  Ad
 ratio which should give us the greatest confidenece that the trend of this model isn't by chance.  It is likely that the model from part 3
 exhibits the tighest fit to the data because taking the 5 year moving average takes a mean of 5 numbers (except for the cases were only a moving average < 5 can be calculated)
 therefore by taking the mean the effect of outlier data points is minimized.  Finally, like the models from part 1 and 2, the model from part 3 shows a consistent
-trend of increasing temperatures suggesting an upward trend towards global warming.   
+trend of increasing temperatures suggesting an upward trend towards global warming.  
+
+4A. All of the models show an upward trend towards global warming and have a relatively tight fit to the data.  The best r squared value
+is the degree 20 model followed by the quadratic model and lastly the linear model.  It is likely that the degree 20 model has the tightest
+fit to the data because there are more points of flexibilty in the model (i.e. the 20 degree model has more parabolas than the quadratic model). 
+However, the linear model best fits the data despite having a slightly lower r squared value than the quadratic model and a lower r squared value than the degree 20 model.
+The linear has only a slightly lower r squared value than the quadratic model and therefore it doesn't warrant selecting the quadratic model because the fit is only slightly
+tighter and likely due to over fitting the data.  The degree 20 model has a moderatly higher r squared value than the linear model, however, in this case it is very clear
+by examming the plotted data and model that this is due to over fitting the model to the training data.  In summary, the linear model, despite having the lowest r squared value of the 3 models,
+offers a tight fit to the data while not overfitting the training data and therefore is the model with the best fit.
+
+4B. The linear model had the lowest rmse value and best fit the data followed by the quadratic model and lastly the degree 20 model.  The quadratic model has a rmse
+value that was about double the rmse value for the linear model.  The degree 20 model, however, had a rmse about 15 times higher than the linear model!  If you compare rmse values
+for the models to r squared values for the models in problem d.2.1 the results for which model had the tighest fit to the data were the exact opposite.  It is likely that linear model
+best fit the testing data because it best avoided overfitting the training data.  The quadratic model had 1 more degree of flexibility compared to the linear model and therefore that caused the
+model to use that flexibilty and overfit a bit to the training data.  The degree 20 model had many points of flexibilty and therefore massively overfitted to the training data and then performed
+terribly on the testing data.  If the A.4.2 data was used to generate the results I predict that the models with more degrees of flexibilty would have overfit the data to an even larger
+extent because there would have been greater variablity in the training data because it was not averaged over many cities and 5 year averages.  Therfore I would expect that the linear model would fit even better
+when compared with the quadratic model and enormously better than the degree 20 model.
+
+5.
+
