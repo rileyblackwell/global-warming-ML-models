@@ -55,5 +55,9 @@ terribly on the testing data.  If the A.4.2 data was used to generate the result
 extent because there would have been greater variablity in the training data because it was not averaged over many cities and 5 year averages.  Therfore I would expect that the linear model would fit even better
 when compared with the quadratic model and enormously better than the degree 20 model.
 
-5.
+5. The plot of 5 year moving averages for standard deviations doesn't appear to support the claim that temperature variation is increasing.  The plot shows a clear downtrend over the years in the
+magnitude of standard deviations.  By taking the standard deviation we are gaining an insight into the daily variation in temperature from the mean but not neccesarily how many days of extreme temperature
+there are in a given year.  That is to say we can see how much the data on average varys from the mean but we aren't counting if there was 10 days or 50 days were the temperature reached extreme levels.  
+A possible solution is to count the number of days for each year that we would consider to be such an extreme deviation from the mean to be classfied as an extreme weather day.  We could then plot the
+total for each year and compare.
 
